@@ -5,7 +5,7 @@
 acceptance_config.yml
 boxes/*
 /.vagrant
-
+.vagrant
 # Box storage for spec
 *.box
 .Vagrantfile.swp
