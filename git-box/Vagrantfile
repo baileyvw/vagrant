@@ -24,6 +24,11 @@ Vagrant.configure("2") do |config|
 # below provison using a shell or you could use shell as in the bottom of this file.
   config.vm.provision "shell",
   path: "~/udemy_vagrant-course/vagrant/scripts/provision.sh"
+#
+  config.vm.provision "shell",
+  path: "https://raw.githubusercontent.com/baileyvw/vagrant/master/scripts/centos-lamp.sh"
+
+  #path: "~/udemy_vagrant-course/vagrant/scripts/provision.sh"
 #    inline: "yum install -y git"
 #  config.vm.provision "shell" do |sh|
 #    sh.path = "./yum-update.sh"
@@ -85,9 +90,9 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   # example 2
-   config.vm.provision "shell", inline: <<-SHELL
-     sudo yum update -y 
+#   config.vm.provision "shell", inline: <<-SHELL
+#     sudo yum update -y 
   #   sudo yum install -y git unzip screen
   #   sudo yum update -y 
-   SHELL
+#   SHELL
 end

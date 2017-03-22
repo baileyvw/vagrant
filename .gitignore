@@ -8,4 +8,4 @@ boxes/*
 
 # Box storage for spec
 *.box
-
+.Vagrantfile.swp
