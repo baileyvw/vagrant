@@ -24,4 +24,3 @@ sudo -u vagrant wget -q https://raw.githubusercontent.com/baileyvw/vagrant/maste
 sudo -u vagrant wget -q https://raw.githubusercontent.com/baileyvw/vagrant/master/files/info.php
 
 service httpd restart:wq!
-
