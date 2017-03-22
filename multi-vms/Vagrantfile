@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
   # web vm
   config.vm.define "web" do |web|
      config.vm.network "forwarded_port", guest: 80, host: 8080
-     web.vm.network "private_network", ip: "192.168.25.60"
+     web.vm.network "private_network", ip: "192.168.10.60"
      web.vm.hostname = "web-server"
      web.vm.provision "shell",
   path: "https://raw.githubusercontent.com/baileyvw/vagrant/master/scripts/centos-web.sh"
@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "db" do |db|
     db.vm.hostname = "database-server"
-   db.vm.network "private_network", ip: "192.168.25.61"
+   db.vm.network "private_network", ip: "192.168.10.61"
     db.vm.provision "shell",
   path: "https://raw.githubusercontent.com/baileyvw/vagrant/master/scripts/centos-database.sh"
   end
