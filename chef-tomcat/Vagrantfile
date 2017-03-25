@@ -19,6 +19,20 @@ Vagrant.configure("2") do |config|
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 
+# I have set the location of the Berksfile because I want use the one in my recipe.
+
+  config.berkshelf.enabled = true
+  config.berkshelf.berksfile_path = "./cookbooks/dev/Berksfile"
+
+# Chef Solo provisioner
+#config.vm.provision :chef_solo do |chef|
+# We use 'berks vendor chef/cookbooks', so look there for cookbooks:
+#  chef.cookbooks_path = "chef/cookbooks"
+# For symmetry, put the roles in the same place.
+#  chef.roles_path = "chef/roles"
+#end
+
+
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
