@@ -13,6 +13,18 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "bp-shimizukawa/centos-6.5"
+  config.vm.hostname = "tomcat"
+
+config.vm.provision "file",
+     source: "~/udemy_vagrant-course/vagrant/files/git-config",
+  #source: "/Users/ansible/udemy_vagrant-course/vagrant/files/git-config",
+     destination: "~/.gitconfig"
+
+  config.vm.provision "shell",
+  path: "https://raw.githubusercontent.com/baileyvw/vagrant/master/scripts/centos-common.sh"
+
+  config.omnibus.chef_version = :latest
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -21,22 +33,34 @@ Vagrant.configure("2") do |config|
 
 # I have set the location of the Berksfile because I want use the one in my recipe.
 
-  config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = "./cookbooks/dev/Berksfile"
+#  config.berkshelf.enabled = true
+#  config.berkshelf.berksfile_path = "./cookbooks/dev/Berksfile"
 
 # Chef Solo provisioner
-#config.vm.provision :chef_solo do |chef|
+ config.vm.provision :chef_solo do |chef|
 # We use 'berks vendor chef/cookbooks', so look there for cookbooks:
-#  chef.cookbooks_path = "chef/cookbooks"
+ chef.cookbooks_path = "../chef/supermarket"
+ #chef.cookbooks_path = "../chef/cookbooks"
 # For symmetry, put the roles in the same place.
-#  chef.roles_path = "chef/roles"
-#end
+#  chef.roles_path = "../chef/roles"
+ chef.add_recipe "java" 
+#  chef.add_recipe "mysql" 
+#  chef.add_role "web"
+  chef.json = {
+    "java" => {
+      "jdk_version" => "7"
+      }
+}
+
+#  chef.json = { mysql_password: "foo" } "web"
+end
 
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -57,13 +81,14 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+     vb.memory = "1024"
+     vb.name = "chef-tomcat"
+   end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
