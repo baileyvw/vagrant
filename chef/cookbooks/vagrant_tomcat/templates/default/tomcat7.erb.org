@@ -9,7 +9,9 @@
 . /etc/init.d/functions
 . /etc/sysconfig/network
 
-CATALINA_HOME=/usr/local/tomcat/apache-tomcat
+#CATALINA_HOME=/usr/local/tomcat/apache-tomcat
+CATALINA_HOME=<%= node["vagrant_tomcat"]["tomcat_instal_loc"] %>
+#CATALINA_HOME=<%= node["vagrant_tomcat"]["tomcat_home"] %>
 TOMCAT_USER=root
 LOCKFILE=/var/lock/subsys/tomcat
 
