@@ -43,15 +43,15 @@ config.vm.provision "file",
  #chef.cookbooks_path = "../chef/cookbooks"
 # For symmetry, put the roles in the same place.
   chef.roles_path = "../chef/roles"
-# chef.add_recipe "java" 
-# chef.add_recipe "vagrant_tomcat" 
+ chef.add_recipe "java" 
+ chef.add_recipe "vagrant_tomcat" 
 #  chef.add_recipe "mysql" 
-  chef.add_role "tomcat7"
-#  chef.json = {
-#    "java" => {
-#      "jdk_version" => "7"
-#      }
-#}
+#  chef.add_role "web"
+  chef.json = {
+    "java" => {
+      "jdk_version" => "7"
+      }
+}
 
 #  chef.json = { mysql_password: "foo" } "web"
 end
